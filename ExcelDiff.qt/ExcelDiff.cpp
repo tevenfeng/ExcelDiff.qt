@@ -2,7 +2,11 @@
 
 void ExcelDiff::file1BtnClicked()
 {
-	QFileDialog *dialog = new QFileDialog(this, QString("Choose file"), QString("./test"), QString("Excel(*.xls*);;All Files(*)"));
+	QFileDialog *dialog = new QFileDialog(this,
+		QString("Choose file"),
+		QString("./test"),
+		QString("Excel(*.xls*);;All Files(*)"));
+
 	QString filePath = dialog->getOpenFileName();
 
 	this->file1->setText(filePath);
@@ -10,7 +14,11 @@ void ExcelDiff::file1BtnClicked()
 
 void ExcelDiff::file2BtnClicked()
 {
-	QFileDialog *dialog = new QFileDialog(this, QString("Choose file"), QString("./test"), QString("Excel(*.xls*);;All Files(*)"));
+	QFileDialog *dialog = new QFileDialog(this,
+		QString("Choose file"),
+		QString("./test"),
+		QString("Excel(*.xls*);;All Files(*)"));
+
 	QString filePath = dialog->getOpenFileName();
 
 	this->file2->setText(filePath);
@@ -18,9 +26,28 @@ void ExcelDiff::file2BtnClicked()
 
 void ExcelDiff::diffBtnClicked()
 {
+	if (!QFileInfo(this->file1->text()).exists()
+		|| !QFileInfo(this->file2->text()).exists())
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Please select two excel files!");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.exec();
+		return;
+	}
+	else
+	{
+		// Load the two Excel files with QXlsx
+		this->excelOne = new QXlsx::Document(this->file1->text());
+		this->excelTwo = new QXlsx::Document(this->file2->text());
 
+		// Extract the two files into vector?
+		// Todo
+		readExcelFile(this->excelOne);
+		readExcelFile(this->excelTwo);
 
-	makeBottom();
+		makeBottom();
+	}
 }
 
 ExcelDiff::ExcelDiff(QWidget *parent)
@@ -107,6 +134,11 @@ void ExcelDiff::makeBottom()
 }
 
 void ExcelDiff::makeLeft()
+{
+
+}
+
+void ExcelDiff::readExcelFile(QXlsx::Document *excelFile)
 {
 
 }

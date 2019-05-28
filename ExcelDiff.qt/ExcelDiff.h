@@ -12,7 +12,10 @@
 #include <QFileDialog>
 #include <QString>
 #include <QTableWidget>
-//#include "Qxlsx/header/xlsxdocument.h"
+#include <QFileInfo>
+#include <QMessageBox>
+#include "xlsxdocument.h"
+
 #include "ui_ExcelDiff.h"
 
 class ExcelDiff : public QMainWindow
@@ -51,7 +54,11 @@ private:
 	QTableWidget *tableWidget1, *tableWidget2, *detailTableWidget;
 	QPushButton *rowBtn, *colBtn, *cellBtn, *clearHighlightBtn;
 
+	QXlsx::Document *excelOne, *excelTwo;
+
 	void makeTop();
 	void makeBottom();
 	void makeLeft();
+
+	void readExcelFile(QXlsx::Document *excelFile);
 };
