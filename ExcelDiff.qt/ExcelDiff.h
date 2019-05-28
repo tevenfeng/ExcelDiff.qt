@@ -59,6 +59,4 @@ private:
 	void makeTop();
 	void makeBottom();
 	void makeLeft();
-
-	void readExcelFile(QXlsx::Document *excelFile);
 };

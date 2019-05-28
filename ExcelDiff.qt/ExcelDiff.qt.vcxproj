@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ExcelDiff.cpp" />
+    <ClCompile Include="ExcelReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QXlsx\source\xlsxabstractooxmlfile.cpp" />
     <ClCompile Include="QXlsx\source\xlsxabstractsheet.cpp" />
@@ -159,6 +160,7 @@
     <QtRcc Include="ExcelDiff.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExcelReader.h" />
     <ClInclude Include="QXlsx\header\xlsxabstractooxmlfile.h" />
     <ClInclude Include="QXlsx\header\xlsxabstractooxmlfile_p.h" />
     <ClInclude Include="QXlsx\header\xlsxabstractsheet.h" />

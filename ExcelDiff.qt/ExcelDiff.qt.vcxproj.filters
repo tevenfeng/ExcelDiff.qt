@@ -101,6 +101,9 @@
     <ClCompile Include="QXlsx\source\xlsxzipwriter.cpp">
       <Filter>QXlsx\source</Filter>
     </ClCompile>
+    <ClCompile Include="ExcelReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="QXlsx\header\xlsxzipwriter_p.h">
       <Filter>QXlsx\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcelReader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

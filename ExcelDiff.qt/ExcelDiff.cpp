@@ -43,8 +43,7 @@ void ExcelDiff::diffBtnClicked()
 
 		// Extract the two files into vector?
 		// Todo
-		readExcelFile(this->excelOne);
-		readExcelFile(this->excelTwo);
+
 
 		makeBottom();
 	}
@@ -134,11 +133,6 @@ void ExcelDiff::makeBottom()
 }
 
 void ExcelDiff::makeLeft()
-{
-
-}
-
-void ExcelDiff::readExcelFile(QXlsx::Document *excelFile)
 {
 
 }
