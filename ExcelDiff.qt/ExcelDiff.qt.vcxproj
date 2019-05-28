@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>E:\Coding\C++\ExcelDiff.qt\ExcelDiff.qt\QXlsx\header;$(IncludePath)</IncludePath>
+    <SourcePath>E:\Coding\C++\ExcelDiff.qt\ExcelDiff.qt\QXlsx\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;XLSX_NO_LIB;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QXLSX_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;XLSX_NO_LIB;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QXLSX_NO_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ExcelDiff.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxabstractooxmlfile.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxabstractsheet.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcell.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcellformula.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcelllocation.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcellrange.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcellreference.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxchart.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxchartsheet.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcolor.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxconditionalformatting.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxcontenttypes.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdatavalidation.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdocpropsapp.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdocpropscore.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdocument.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdrawing.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxdrawinganchor.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxformat.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxmediafile.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxnumformatparser.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxrelationships.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxrichstring.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxsharedstrings.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxsimpleooxmlfile.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxstyles.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxtheme.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxutility.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxworkbook.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxworksheet.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxzipreader.cpp" />
+    <ClCompile Include="QXlsx\source\xlsxzipwriter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ExcelDiff.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ExcelDiff.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="ExcelDiff.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QXlsx\header\xlsxabstractooxmlfile.h" />
+    <ClInclude Include="QXlsx\header\xlsxabstractooxmlfile_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxabstractsheet.h" />
+    <ClInclude Include="QXlsx\header\xlsxabstractsheet_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxcell.h" />
+    <ClInclude Include="QXlsx\header\xlsxcellformula.h" />
+    <ClInclude Include="QXlsx\header\xlsxcellformula_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxcelllocation.h" />
+    <ClInclude Include="QXlsx\header\xlsxcellrange.h" />
+    <ClInclude Include="QXlsx\header\xlsxcellreference.h" />
+    <ClInclude Include="QXlsx\header\xlsxcell_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxchart.h" />
+    <ClInclude Include="QXlsx\header\xlsxchartsheet.h" />
+    <ClInclude Include="QXlsx\header\xlsxchartsheet_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxchart_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxcolor_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxconditionalformatting.h" />
+    <ClInclude Include="QXlsx\header\xlsxconditionalformatting_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxcontenttypes_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdatavalidation.h" />
+    <ClInclude Include="QXlsx\header\xlsxdatavalidation_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdocpropsapp_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdocpropscore_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdocument_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdrawinganchor_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxdrawing_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxformat.h" />
+    <ClInclude Include="QXlsx\header\xlsxformat_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxglobal.h" />
+    <ClInclude Include="QXlsx\header\xlsxmediafile_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxnumformatparser_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxrelationships_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxrichstring.h" />
+    <ClInclude Include="QXlsx\header\xlsxrichstring_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxsharedstrings_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxsimpleooxmlfile_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxstyles_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxtheme_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxutility_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxworkbook.h" />
+    <ClInclude Include="QXlsx\header\xlsxworkbook_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxworksheet.h" />
+    <ClInclude Include="QXlsx\header\xlsxworksheet_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxzipreader_p.h" />
+    <ClInclude Include="QXlsx\header\xlsxzipwriter_p.h" />
+    <QtMoc Include="QXlsx\header\xlsxdocument.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="$(DefaultQtVersion)" MocOptions="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
