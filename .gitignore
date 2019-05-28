@@ -4,3 +4,6 @@ ExcelDiff.qt/x64
 ExcelDiff.qt.VC.db
 ExcelDiff.qt.VC.VC.opendb
 .vs/
+ExcelDiff.qt/ExcelDiff.qt.vcxproj
+ExcelDiff.qt/ExcelDiff.qt.vcxproj.filters
+ExcelDiff.qt/ExcelDiff.qt.vcxproj.user
