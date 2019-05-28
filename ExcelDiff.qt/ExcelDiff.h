@@ -18,6 +18,8 @@
 
 #include "ui_ExcelDiff.h"
 
+#include "ExcelReader.h"
+
 class ExcelDiff : public QMainWindow
 {
 	Q_OBJECT

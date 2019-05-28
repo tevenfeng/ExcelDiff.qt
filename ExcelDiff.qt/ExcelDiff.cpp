@@ -44,6 +44,8 @@ void ExcelDiff::diffBtnClicked()
 		// Extract the two files into vector?
 		// Todo
 
+		ExcelReader *reader = new ExcelReader(this->excelOne);
+
 
 		makeBottom();
 	}
