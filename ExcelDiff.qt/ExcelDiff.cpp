@@ -2,24 +2,20 @@
 
 void ExcelDiff::file1BtnClicked()
 {
-	QFileDialog *dialog = new QFileDialog(this,
+	QString filePath = QFileDialog::getOpenFileName(this,
 		QString("Choose file"),
 		QString("./test"),
-		QString("Excel(*.xls*);;All Files(*)"));
-
-	QString filePath = dialog->getOpenFileName();
+		QString("Excel (*.xlsx)"));
 
 	this->file1->setText(filePath);
 }
 
 void ExcelDiff::file2BtnClicked()
 {
-	QFileDialog *dialog = new QFileDialog(this,
+	QString filePath = QFileDialog::getOpenFileName(this,
 		QString("Choose file"),
 		QString("./test"),
-		QString("Excel(*.xls*);;All Files(*)"));
-
-	QString filePath = dialog->getOpenFileName();
+		QString("Excel (*.xlsx)"));
 
 	this->file2->setText(filePath);
 }
