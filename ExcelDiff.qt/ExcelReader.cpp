@@ -18,7 +18,7 @@ ExcelReader::~ExcelReader()
 	delete this->excelFile;
 }
 
-std::vector<std::vector<std::vector<std::string>>>* ExcelReader::read()
+QVector<QVector<QVector<ExcelCell>>>* ExcelReader::read()
 {
 	return this->isReadSuccessful ? this->excelData : NULL;
 }
@@ -33,14 +33,48 @@ bool ExcelReader::extractData()
 	// Assuming there's no problem with the excel file
 	// Just read it.
 
-	this->excelData = new std::vector<std::vector<std::vector<std::string>>>();
+	// Multiple sheets
+	// excelData[sheet][row][column]
+	this->excelData = new QVector<QVector<QVector<ExcelCell>>>();
 
 	try {
+		// Get all sheets for iterating
 		QStringList sheetNames = this->excelFile->sheetNames();
 		for (int i = 0; i < sheetNames.size(); ++i)
 		{
+			// Data from a single sheet
+			QVector<QVector<ExcelCell>> sheetData = QVector<QVector<ExcelCell>>();
+
+			// Read all cells in the sheet.
 			this->excelFile->selectSheet(sheetNames[i]);
-			this->excelFile->cellAt(1, 1);
+			QXlsx::Worksheet* wsheet = this->excelFile->currentWorksheet();
+			int maxRow = -1;
+			int maxCol = -1;
+			QVector<QXlsx::CellLocation> clList = wsheet->getFullCells(&maxRow, &maxCol);
+			
+			int currentRow = 0; int currentCol = 0;
+			QVector<ExcelCell> rowData = QVector<ExcelCell>();
+			for each (QXlsx::CellLocation cellVar in clList)
+			{
+				if (currentRow < cellVar.row)
+				{
+					sheetData.push_back(rowData);
+					currentRow++;
+					currentCol = 0;
+					rowData = QVector<ExcelCell>();
+				}
+
+				ExcelCell tmp = ExcelCell(cellVar.row, 
+										cellVar.col, 
+										cellVar.cell.data()->value().toString().toStdString());
+				rowData.push_back(tmp);
+			}
+			sheetData.push_back(rowData);
+
+			// Store data with QVector<QVector<ExcelCell>>
+
+
+			this->excelData->push_back(sheetData);
 		}
 
 		this->isReadSuccessful = true;

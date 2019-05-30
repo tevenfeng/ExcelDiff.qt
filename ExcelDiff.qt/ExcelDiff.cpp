@@ -34,6 +34,7 @@ void ExcelDiff::diffBtnClicked()
 	else
 	{
 		// Load the two Excel files with QXlsx
+		// Maybe this should be done separately in another thread?
 		this->excelOne = new QXlsx::Document(this->file1->text());
 		this->excelTwo = new QXlsx::Document(this->file2->text());
 
@@ -42,8 +43,11 @@ void ExcelDiff::diffBtnClicked()
 
 		ExcelReader *reader = new ExcelReader(this->excelOne);
 
-
 		makeBottom();
+		
+		// Delete files
+		delete this->excelOne;
+		delete this->excelTwo;
 	}
 }
 

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <vector>
+#include <QVector>
 #include <exception>
 #include "xlsxdocument.h"
+#include "ExcelCell.h"
 
 class ExcelReader
 {
@@ -11,7 +12,7 @@ public:
 	ExcelReader(QXlsx::Document *excelFile);
 	~ExcelReader();
 
-	std::vector<std::vector<std::vector<std::string>>>* read();
+	QVector<QVector<QVector<ExcelCell>>>* read();
 
 	bool readSuccessful();
 
@@ -22,7 +23,7 @@ private:
 
 	// Vector for storing excel data.
 	// excelData[sheet][row][column]
-	std::vector<std::vector<std::vector<std::string>>> *excelData;
+	QVector<QVector<QVector<ExcelCell>>>* excelData;
 
 	bool isReadSuccessful;
 
