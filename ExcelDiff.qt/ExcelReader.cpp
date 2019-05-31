@@ -40,6 +40,8 @@ bool ExcelReader::extractData()
 	try {
 		// Get all sheets for iterating
 		QStringList sheetNames = this->excelFile->sheetNames();
+
+		// Iterating all sheets
 		for (int i = 0; i < sheetNames.size(); ++i)
 		{
 			// Data from a single sheet
@@ -51,7 +53,8 @@ bool ExcelReader::extractData()
 			int maxRow = -1;
 			int maxCol = -1;
 			QVector<QXlsx::CellLocation> clList = wsheet->getFullCells(&maxRow, &maxCol);
-			
+
+			// Iterating rows and columns
 			int currentRow = 0; int currentCol = 0;
 			QVector<ExcelCell> rowData = QVector<ExcelCell>();
 			for each (QXlsx::CellLocation cellVar in clList)
@@ -64,25 +67,23 @@ bool ExcelReader::extractData()
 					rowData = QVector<ExcelCell>();
 				}
 
-				ExcelCell tmp = ExcelCell(cellVar.row, 
-										cellVar.col, 
-										cellVar.cell.data()->value().toString().toStdString());
+				ExcelCell tmp = ExcelCell(cellVar.row,
+					cellVar.col,
+					cellVar.cell.data()->value().toString().toStdU16String());
 				rowData.push_back(tmp);
 			}
+			// Finishing iterating a single sheet
 			sheetData.push_back(rowData);
-
-			// Store data with QVector<QVector<ExcelCell>>
-
 
 			this->excelData->push_back(sheetData);
 		}
 
 		this->isReadSuccessful = true;
+		return true;
 	}
 	catch (std::exception& e)
 	{
 		this->isReadSuccessful = false;
+		return false;
 	}
-
-	return this->isReadSuccessful;
 }

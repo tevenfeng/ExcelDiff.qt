@@ -4,7 +4,7 @@ ExcelCell::ExcelCell()
 {
 }
 
-ExcelCell::ExcelCell(int row, int col, std::string value)
+ExcelCell::ExcelCell(int row, int col, std::u16string value)
 {
 	this->row = row;
 	this->col = col;
@@ -25,7 +25,7 @@ int ExcelCell::getCol() const
 	return this->col;
 }
 
-std::string ExcelCell::getValue() const
+std::u16string ExcelCell::getValue() const
 {
 	return this->value;
 }
