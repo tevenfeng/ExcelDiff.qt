@@ -18,6 +18,7 @@
 
 #include "ui_ExcelDiff.h"
 
+#include "ExcelCell.h"
 #include "ExcelReader.h"
 
 class ExcelDiff : public QMainWindow
@@ -56,7 +57,7 @@ private:
 	QTableWidget *tableWidget1, *tableWidget2, *detailTableWidget;
 	QPushButton *rowBtn, *colBtn, *cellBtn, *clearHighlightBtn;
 
-	QXlsx::Document *excelOne, *excelTwo;
+	QVector<QVector<QVector<ExcelCell>>> excelOneData, excelTwoData;
 
 	void makeTop();
 	void makeBottom();

@@ -35,19 +35,19 @@ void ExcelDiff::diffBtnClicked()
 	{
 		// Load the two Excel files with QXlsx
 		// Maybe this should be done separately in another thread?
-		this->excelOne = new QXlsx::Document(this->file1->text());
-		this->excelTwo = new QXlsx::Document(this->file2->text());
 
 		// Extract the two files into vector?
 		// Todo
+		ExcelReader *readerOne = new ExcelReader(this->file1->text());
+		this->excelOneData = readerOne->read();
 
-		ExcelReader *reader = new ExcelReader(this->excelOne);
+		ExcelReader *readerTwo = new ExcelReader(this->file2->text());
+		this->excelTwoData = readerTwo->read();
 
 		makeBottom();
-		
-		// Delete files
-		delete this->excelOne;
-		delete this->excelTwo;
+
+		delete readerOne;
+		delete readerTwo;
 	}
 }
 

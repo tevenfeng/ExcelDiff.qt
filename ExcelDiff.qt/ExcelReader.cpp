@@ -6,21 +6,20 @@ ExcelReader::ExcelReader()
 {
 }
 
-ExcelReader::ExcelReader(QXlsx::Document * excelFile)
+ExcelReader::ExcelReader(QString filePath)
 {
-	this->excelFile = excelFile;
+	this->excelFile = new QXlsx::Document(filePath);
 	extractData();
 }
 
 ExcelReader::~ExcelReader()
 {
-	delete this->excelData;
 	delete this->excelFile;
 }
 
-QVector<QVector<QVector<ExcelCell>>>* ExcelReader::read()
+QVector<QVector<QVector<ExcelCell>>> ExcelReader::read() const
 {
-	return this->isReadSuccessful ? this->excelData : NULL;
+	return this->isReadSuccessful ? std::move(this->excelData) : QVector<QVector<QVector<ExcelCell>>>();
 }
 
 bool ExcelReader::readSuccessful()
@@ -35,7 +34,7 @@ bool ExcelReader::extractData()
 
 	// Multiple sheets
 	// excelData[sheet][row][column]
-	this->excelData = new QVector<QVector<QVector<ExcelCell>>>();
+	this->excelData = QVector<QVector<QVector<ExcelCell>>>();
 
 	try {
 		// Get all sheets for iterating
@@ -75,7 +74,7 @@ bool ExcelReader::extractData()
 			// Finishing iterating a single sheet
 			sheetData.push_back(rowData);
 
-			this->excelData->push_back(sheetData);
+			this->excelData.push_back(sheetData);
 		}
 
 		this->isReadSuccessful = true;

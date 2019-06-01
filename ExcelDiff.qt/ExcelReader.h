@@ -9,21 +9,22 @@ class ExcelReader
 {
 public:
 	ExcelReader();
-	ExcelReader(QXlsx::Document *excelFile);
+	ExcelReader(QString filePath);
 	~ExcelReader();
 
-	QVector<QVector<QVector<ExcelCell>>>* read();
+	QVector<QVector<QVector<ExcelCell>>> read() const;
 
 	bool readSuccessful();
 
 private:
 
-	// Excel file with QXlsx document pointer.
-	QXlsx::Document *excelFile = nullptr;
+	// Excel file with QXlsx document.
+	QXlsx::Document *excelFile;
 
 	// Vector for storing excel data.
 	// excelData[sheet][row][column]
-	QVector<QVector<QVector<ExcelCell>>>* excelData;
+	// MAYBE SHOULD be replaced by object, using std::move() to pass out?
+	QVector<QVector<QVector<ExcelCell>>> excelData;
 
 	bool isReadSuccessful;
 
