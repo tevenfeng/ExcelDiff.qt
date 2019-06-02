@@ -1,56 +1,5 @@
 #include "ExcelDiff.h"
 
-void ExcelDiff::file1BtnClicked()
-{
-	QString filePath = QFileDialog::getOpenFileName(this,
-		QString("Choose file"),
-		QString("./test"),
-		QString("Excel (*.xlsx)"));
-
-	this->file1->setText(filePath);
-}
-
-void ExcelDiff::file2BtnClicked()
-{
-	QString filePath = QFileDialog::getOpenFileName(this,
-		QString("Choose file"),
-		QString("./test"),
-		QString("Excel (*.xlsx)"));
-
-	this->file2->setText(filePath);
-}
-
-void ExcelDiff::diffBtnClicked()
-{
-	if (!QFileInfo(this->file1->text()).exists()
-		|| !QFileInfo(this->file2->text()).exists())
-	{
-		QMessageBox msgBox;
-		msgBox.setText("Please select two excel files!");
-		msgBox.setStandardButtons(QMessageBox::Ok);
-		msgBox.exec();
-		return;
-	}
-	else
-	{
-		// Load the two Excel files with QXlsx
-		// Maybe this should be done separately in another thread?
-
-		// Extract the two files into vector?
-		// Todo
-		ExcelReader *readerOne = new ExcelReader(this->file1->text());
-		this->excelOneData = readerOne->read();
-
-		ExcelReader *readerTwo = new ExcelReader(this->file2->text());
-		this->excelTwoData = readerTwo->read();
-
-		makeBottom();
-
-		delete readerOne;
-		delete readerTwo;
-	}
-}
-
 ExcelDiff::ExcelDiff(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -137,4 +86,55 @@ void ExcelDiff::makeBottom()
 void ExcelDiff::makeLeft()
 {
 
+}
+
+void ExcelDiff::file1BtnClicked()
+{
+	QString filePath = QFileDialog::getOpenFileName(this,
+		QString("Choose file"),
+		QString("./test"),
+		QString("Excel (*.xlsx)"));
+
+	this->file1->setText(filePath);
+}
+
+void ExcelDiff::file2BtnClicked()
+{
+	QString filePath = QFileDialog::getOpenFileName(this,
+		QString("Choose file"),
+		QString("./test"),
+		QString("Excel (*.xlsx)"));
+
+	this->file2->setText(filePath);
+}
+
+void ExcelDiff::diffBtnClicked()
+{
+	if (!QFileInfo(this->file1->text()).exists()
+		|| !QFileInfo(this->file2->text()).exists())
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Please select two excel files!");
+		msgBox.setStandardButtons(QMessageBox::Ok);
+		msgBox.exec();
+		return;
+	}
+	else
+	{
+		// Load the two Excel files with QXlsx
+		// Maybe this should be done separately in another thread?
+
+		// Extract the two files into QVector<QVector<QVector<ExcelCell>>>
+		// E.g. excelOneData[sheet][row][column]
+		ExcelReader *readerOne = new ExcelReader(this->file1->text());
+		this->excelOneData = readerOne->read();
+
+		ExcelReader *readerTwo = new ExcelReader(this->file2->text());
+		this->excelTwoData = readerTwo->read();
+
+		makeBottom();
+
+		delete readerOne;
+		delete readerTwo;
+	}
 }
