@@ -14,26 +14,36 @@
 #include <QTableWidget>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QThread>
 #include "xlsxdocument.h"
 
 #include "ui_ExcelDiff.h"
 
 #include "ExcelCell.h"
-#include "ExcelReader.h"
+// #include "ExcelReader.h"
+#include "QExcelReader.h"
+
 
 class ExcelDiff : public QMainWindow
 {
 	Q_OBJECT
 
-		signals :
+		public slots :
 
-	public slots :
-
-		void file1BtnClicked();
+	void file1BtnClicked();
 
 	void file2BtnClicked();
 
 	void diffBtnClicked();
+
+	void excelOneDataRecv(QVector<QVector<QVector<ExcelCell>>> excelOneData);
+
+	void excelTwoDataRecv(QVector<QVector<QVector<ExcelCell>>> excelTwoData);
+
+signals:
+	void startThreadOne();
+
+	void startThreadTwo();
 
 public:
 	ExcelDiff(QWidget *parent = Q_NULLPTR);
@@ -58,6 +68,11 @@ private:
 	QPushButton *rowBtn, *colBtn, *cellBtn, *clearHighlightBtn;
 
 	QVector<QVector<QVector<ExcelCell>>> excelOneData, excelTwoData;
+
+	QExcelReader *readerOne, *readerTwo;
+	QThread *threadOne, *threadTwo;
+
+	void loadExcelFilesWithThreads();
 
 	void makeTop();
 	void makeBottom();
