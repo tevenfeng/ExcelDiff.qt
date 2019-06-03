@@ -41,9 +41,7 @@ class ExcelDiff : public QMainWindow
 	void excelTwoDataRecv(QVector<QVector<QVector<ExcelCell>>> excelTwoData);
 
 signals:
-	void startThreadOne();
-
-	void startThreadTwo();
+	void startReaderThread();
 
 public:
 	ExcelDiff(QWidget *parent = Q_NULLPTR);
@@ -70,9 +68,9 @@ private:
 	QVector<QVector<QVector<ExcelCell>>> excelOneData, excelTwoData;
 
 	QExcelReader *readerOne, *readerTwo;
-	QThread *threadOne, *threadTwo;
+	QThread *readerThread;
 
-	void loadExcelFilesWithThreads();
+	void loadExcelFilesWithSeparateThread();
 
 	void makeTop();
 	void makeBottom();

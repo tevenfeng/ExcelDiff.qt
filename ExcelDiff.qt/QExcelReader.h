@@ -22,18 +22,21 @@ class QExcelReader : public QObject
 
 	public slots:
 
-	void extractData();
+	void extractDataOne();
+
+	void extractDataTwo();
 
 signals:
-	// extractData() will emit this signal
+	// extractDataOne() will emit this signal
 	// to inform that excel has been loaded
-	void dataLoaded(QVector<QVector<QVector<ExcelCell>>>);
+	void dataOneLoaded(QVector<QVector<QVector<ExcelCell>>>);
+
+	// extractDataTwo() will emit this signal
+	// to inform that excel has been loaded
+	void dataTwoLoaded(QVector<QVector<QVector<ExcelCell>>>);
 
 public:
 	QExcelReader(QObject *parent);
 	QExcelReader(QString filePath, QObject *parent);
 	~QExcelReader();
-
-private:
-
 };
