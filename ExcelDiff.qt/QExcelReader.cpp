@@ -18,7 +18,7 @@ QExcelReader::~QExcelReader()
 
 void QExcelReader::extractData()
 {
-	this->excelFile = new QXlsx::Document(filePath);
+	this->excelFile = new QXlsx::Document(this->filePath);
 
 	// Assuming there's no problem with the excel file
 	// Just read it.

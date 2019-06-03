@@ -128,13 +128,6 @@ void ExcelDiff::diffBtnClicked()
 		// Load excel files with multi-threads
 		loadExcelFilesWithThreads();
 
-		//ExcelReader *readerOne = new ExcelReader(this->file1->text());
-		//this->excelOneData = readerOne->read();
-		//ExcelReader *readerTwo = new ExcelReader(this->file2->text());
-		//this->excelTwoData = readerTwo->read();
-		//delete readerOne;
-		//delete readerTwo;
-
 		makeBottom();
 	}
 }
@@ -144,6 +137,7 @@ void ExcelDiff::excelOneDataRecv(QVector<QVector<QVector<ExcelCell>>> excelOneDa
 	this->excelOneData = excelOneData;
 	this->threadOne->quit();
 	this->threadOne->wait();
+	delete this->threadOne;
 }
 
 void ExcelDiff::excelTwoDataRecv(QVector<QVector<QVector<ExcelCell>>> excelTwoData)
@@ -151,6 +145,7 @@ void ExcelDiff::excelTwoDataRecv(QVector<QVector<QVector<ExcelCell>>> excelTwoDa
 	this->excelTwoData = excelTwoData;
 	this->threadTwo->quit();
 	this->threadTwo->wait();
+	delete this->threadTwo;
 }
 
 // Load the two Excel files with QXlsx in two separate threads
@@ -159,20 +154,18 @@ void ExcelDiff::loadExcelFilesWithThreads()
 	this->readerOne = new QExcelReader(this->file1->text(), 0);
 	this->threadOne = new QThread(this);
 	this->readerOne->moveToThread(this->threadOne);
+	QObject::connect(this->threadOne, &QThread::finished, this->readerOne, &QObject::deleteLater);
 	QObject::connect(this, &ExcelDiff::startThreadOne, this->readerOne, &QExcelReader::extractData);
 	QObject::connect(this->readerOne, &QExcelReader::dataLoaded, this, &ExcelDiff::excelOneDataRecv);
-	QObject::connect(this->threadOne, &QThread::finished, this->readerOne, &QObject::deleteLater);
-	QObject::connect(this->threadOne, &QThread::finished, this->threadOne, &QObject::deleteLater);
 	this->threadOne->start();
 	emit startThreadOne();
 
 	this->readerTwo = new QExcelReader(this->file2->text(), 0);
 	this->threadTwo = new QThread(this);
 	this->readerTwo->moveToThread(this->threadTwo);
+	QObject::connect(this->threadTwo, &QThread::finished, this->readerTwo, &QObject::deleteLater);
 	QObject::connect(this, &ExcelDiff::startThreadTwo, this->readerTwo, &QExcelReader::extractData);
 	QObject::connect(this->readerTwo, &QExcelReader::dataLoaded, this, &ExcelDiff::excelTwoDataRecv);
-	QObject::connect(this->threadTwo, &QThread::finished, this->readerTwo, &QObject::deleteLater);
-	QObject::connect(this->threadTwo, &QThread::finished, this->threadTwo, &QObject::deleteLater);
 	this->threadTwo->start();
 	emit startThreadTwo();
 }
