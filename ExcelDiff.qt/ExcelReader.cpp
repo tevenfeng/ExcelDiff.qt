@@ -56,21 +56,21 @@ bool ExcelReader::extractData()
 			// Iterating rows and columns
 			int currentRow = 0; int currentCol = 0;
 			QVector<ExcelCell> rowData = QVector<ExcelCell>();
-			for each (QXlsx::CellLocation cellVar in clList)
-			{
-				if (currentRow < cellVar.row)
-				{
-					sheetData.push_back(rowData);
-					currentRow++;
-					currentCol = 0;
-					rowData = QVector<ExcelCell>();
-				}
+			for (int i = 0; i < clList.size(); ++i)
+            {
+                if (currentRow < clList[i].row)
+                {
+                    sheetData.push_back(rowData);
+                    currentRow++;
+                    currentCol = 0;
+                    rowData = QVector<ExcelCell>();
+                }
 
-				ExcelCell tmp = ExcelCell(cellVar.row,
-					cellVar.col,
-					cellVar.cell.data()->value().toString().toStdU16String());
-				rowData.push_back(tmp);
-			}
+                ExcelCell tmp = ExcelCell(clList[i].row,
+                                          clList[i].col,
+                                          clList[i].cell.data()->value().toString().toStdU16String());
+                rowData.push_back(tmp);
+            }
 			// Finishing iterating a single sheet
 			sheetData.push_back(rowData);
 
